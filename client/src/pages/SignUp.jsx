@@ -16,7 +16,6 @@ const SignUp = () => {
 	// }
 
 	const handleChange = (e) => {
-		console.log(e.target.value);
 		setFormData({
 			...formData,
 			[e.target.id]: e.target.value,
