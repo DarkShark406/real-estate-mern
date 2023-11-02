@@ -32,7 +32,7 @@ const Header = () => {
 							About
 						</li>
 					</Link>
-					<Link to="/profile">Sign In</Link>
+					<Link to="/sign-in">Sign In</Link>
 				</ul>
 			</div>
 		</header>
