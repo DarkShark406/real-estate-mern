@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 // Routes
 import userRouter from "./routes/user.route.js";
@@ -19,6 +20,8 @@ mongoose
 const app = express();
 
 app.use(express.json()); // Allow send json data
+
+app.use(cookieParser());
 
 const port = 3000;
 
