@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post("/update/:id", veriryToken, updateUser);
 router.delete("/delete/:id", veriryToken, deleteUser);
-router.get("/listing/:id", veriryToken, getUserListings);
+router.get("/listings/:id", veriryToken, getUserListings);
 
 export default router;
