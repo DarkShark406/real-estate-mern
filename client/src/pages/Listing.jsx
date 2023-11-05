@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
+import { useSelector } from "react-redux";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import {
@@ -11,13 +12,17 @@ import {
 	FaMapMarkedAlt,
 	FaParking,
 } from "react-icons/fa";
+import Contact from "../components/Contact";
 
 const Listing = () => {
 	const params = useParams();
+	const { currentUser } = useSelector((state) => state.user);
 
 	const [listing, setListing] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
+	const [copied, setCopied] = useState(false);
+	const [contact, setContact] = useState(false);
 
 	// Swiper
 	SwiperCore.use([Navigation]);
@@ -75,6 +80,7 @@ const Listing = () => {
 							{listing.offer
 								? listing.discountPrice.toLocaleString("en-US")
 								: listing.regularPrice.toLocaleString("en-US")}
+							{listing.type === "rent" ? " / month" : ""}
 						</h1>
 
 						<p className="flex items-center text-slate-600 text-sm gap-2">
@@ -113,6 +119,15 @@ const Listing = () => {
 								{listing.parking ? "Furnished" : "Not furnished"}
 							</li>
 						</ul>
+
+						{currentUser && listing.userRef !== currentUser._id && !contact && (
+							<button
+								className="bg-slate-700 uppercase text-white rounded-lg hover:opacity-95 p-3"
+								onClick={() => setContact(true)}>
+								Contactl landlord
+							</button>
+						)}
+						{contact && <Contact listing={listing} />}
 					</div>
 				</>
 			)}
