@@ -4,6 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
+import {
+	FaBath,
+	FaBed,
+	FaChair,
+	FaMapMarkedAlt,
+	FaParking,
+} from "react-icons/fa";
+
 const Listing = () => {
 	const params = useParams();
 
@@ -48,8 +56,6 @@ const Listing = () => {
 			)}
 			{listing && !loading && !error && (
 				<>
-					<h1>{listing.name}</h1>
-
 					<Swiper navigation>
 						{listing.imageUrls.map((imageUrl) => (
 							<SwiperSlide key={imageUrl}>
@@ -62,6 +68,52 @@ const Listing = () => {
 							</SwiperSlide>
 						))}
 					</Swiper>
+
+					<div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-3">
+						<h1 className="text-3xl font-semibold">
+							{listing.name} - ${" "}
+							{listing.offer
+								? listing.discountPrice.toLocaleString("en-US")
+								: listing.regularPrice.toLocaleString("en-US")}
+						</h1>
+
+						<p className="flex items-center text-slate-600 text-sm gap-2">
+							<FaMapMarkedAlt className="text-green-700" />
+							{listing.address}
+						</p>
+						<div className="flex items-center gap-4">
+							<p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+								{listing.type === "sale" ? "For Sale" : "For rent"}
+							</p>
+							{listing.offer && (
+								<p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+									${listing.regularPrice - listing.discountPrice} discount
+								</p>
+							)}
+						</div>
+						<p className="text-slate-800">
+							<span className="font-semibold text-black">Description - </span>
+							{listing.description}
+						</p>
+						<ul className="flex items-center gap-4 flex-wrap text-green-900 font-semibold text-sm">
+							<li className="flex items-center gap-1 ">
+								<FaBed className="text-lg" />
+								{listing.bedrooms} {listing.bedrooms > 1 ? "Beds" : "Bed"}
+							</li>
+							<li className="flex items-center gap-1 ">
+								<FaBath className="text-lg" />
+								{listing.bathrooms} {listing.bathrooms > 1 ? "Baths" : "Bath"}
+							</li>
+							<li className="flex items-center gap-1 ">
+								<FaParking className="text-lg" />
+								{listing.parking ? "Parking spot" : "No parking"}
+							</li>
+							<li className="flex items-center gap-1 ">
+								<FaChair className="text-lg" />
+								{listing.parking ? "Furnished" : "Not furnished"}
+							</li>
+						</ul>
+					</div>
 				</>
 			)}
 		</main>

@@ -27,7 +27,7 @@ export const signin = async (req, res, next) => {
 			return next(errorHandler(401, "Password does not match account!"));
 
 		const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-		console.log(validUser);
+
 		const { password: pass, ...rest } = validUser._doc;
 
 		res
