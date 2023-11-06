@@ -92,7 +92,7 @@ export const getLisitng = async (req, res, next) => {
 	}
 };
 
-export const getListings = async (req, res, next) => {
+export const searchListings = async (req, res, next) => {
 	try {
 		const limit = parseInt(req.query.limit) || 9;
 		const startIndex = parseInt(req.query.startIndex) || 0;
