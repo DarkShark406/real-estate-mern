@@ -16,6 +16,7 @@ const Search = () => {
 	});
 	const [loading, setLoading] = useState(false);
 	const [listings, setListings] = useState([]);
+	const [showMore, setShowMore] = useState(false);
 
 	useEffect(() => {
 		const urlParams = new URLSearchParams(location.search);
@@ -49,9 +50,16 @@ const Search = () => {
 
 		const fetchListings = async () => {
 			setLoading(true);
+			setShowMore(false);
 			const searchQuery = urlParams.toString();
 			const res = await fetch("/api/listing/search?" + searchQuery);
 			const data = await res.json();
+
+			if (data.length > 8) {
+				setShowMore(true);
+			} else {
+				setShowMore(false);
+			}
 
 			setListings(data);
 			setLoading(false);
@@ -105,7 +113,20 @@ const Search = () => {
 		navigate("/search?" + searchQuery);
 	};
 
-	console.log(listings);
+	const handleShowMoreClick = async () => {
+		const numberOfListing = listings.length;
+		const startIndex = numberOfListing;
+		const urlParams = new URLSearchParams(location.search);
+		urlParams.set("startIndex", startIndex);
+		const searchQuery = urlParams.toString();
+		const res = await fetch("/api/listing/search?" + searchQuery);
+		const data = await res.json();
+
+		if (data.length < 9) {
+			setShowMore(false);
+		}
+		setShowMore([...listings, ...data]);
+	};
 
 	return (
 		<main className="flex flex-col md:flex-row">
@@ -217,7 +238,7 @@ const Search = () => {
 				<h1 className="text-3xl font-semibold p-3 text-slate-700">
 					Listing results:
 				</h1>
-				<div className="p-7 flex flex-wrap gap-4 justify-center">
+				<div className="p-7 flex flex-wrap gap-4 self-center">
 					{!loading && listings.length === 0 && (
 						<p className="text-slate-700">No listing found</p>
 					)}
@@ -230,6 +251,13 @@ const Search = () => {
 							<ListingItem key={listing._id} listing={listing} />
 						))}
 				</div>
+				{showMore && (
+					<button
+						className="text-green-700 hover:underline p-7"
+						onClick={handleShowMoreClick()}>
+						Show more
+					</button>
+				)}
 			</div>
 		</main>
 	);

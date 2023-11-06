@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
+
 const ListingItem = ({ listing }) => {
 	return (
-		<div className="bg-white show-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg sm:w-full lg:w-[calc(50%-10px)] xl:w-[calc(33%-10px)]">
+		<div className="bg-white show-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg sm:w-full xl:w-[calc(50%-10px)] 2xl:w-[calc(33%-10px)]">
 			<Link to={"/listing/" + listing._id}>
 				<img
 					src={
