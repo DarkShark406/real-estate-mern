@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem";
 
 const Search = () => {
 	const navigate = useNavigate();
@@ -53,12 +54,11 @@ const Search = () => {
 			const data = await res.json();
 
 			setListings(data);
+			setLoading(false);
 		};
 
 		fetchListings();
 	}, [location.search]);
-
-	console.log(listings);
 
 	const handleChange = (e) => {
 		const inputId = e.target.id;
@@ -104,6 +104,8 @@ const Search = () => {
 		const searchQuery = urlParams.toString();
 		navigate("/search?" + searchQuery);
 	};
+
+	console.log(listings);
 
 	return (
 		<main className="flex flex-col md:flex-row">
@@ -211,10 +213,23 @@ const Search = () => {
 					</button>
 				</form>
 			</div>
-			<div className="">
+			<div className="flex-1">
 				<h1 className="text-3xl font-semibold p-3 text-slate-700">
 					Listing results:
 				</h1>
+				<div className="p-7 flex flex-wrap gap-4 justify-center">
+					{!loading && listings.length === 0 && (
+						<p className="text-slate-700">No listing found</p>
+					)}
+
+					{loading && <p className="text-slate-700 text-center">Loading...</p>}
+
+					{!loading &&
+						listings &&
+						listings.map((listing) => (
+							<ListingItem key={listing._id} listing={listing} />
+						))}
+				</div>
 			</div>
 		</main>
 	);

@@ -59,7 +59,7 @@ const CreateListing = () => {
 		});
 	};
 
-	const handleImageUpload = () => {
+	const handleImageUpload = (e) => {
 		if (files.length === 0)
 			return setImageUploadError("You have not chosen any images to upload!");
 		if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -79,7 +79,7 @@ const CreateListing = () => {
 					setImageUploadError(false);
 					setUploading(false);
 				})
-				.catch(() => {
+				.catch((err) => {
 					setImageUploadError(
 						"Image upload failded (2MB max per image). Please upload other images!"
 					);
@@ -352,7 +352,7 @@ const CreateListing = () => {
 						<button
 							className="p-3 text-green-700 border border-green-700 rounded uppercase transition duration-500 hover:bg-green-700 hover:text-white  disabled:opacity-95"
 							type="button"
-							onClick={handleImageUpload()}>
+							onClick={(e) => handleImageUpload(e)}>
 							{uploading ? "Uploading..." : "Upload"}
 						</button>
 					</div>
