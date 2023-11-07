@@ -55,6 +55,7 @@ const Profile = () => {
 					(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 				setFilePerc(Math.round(progress));
 			},
+			// eslint-disable-next-line no-unused-vars
 			(error) => {
 				setFileUploadError(true);
 				return;
@@ -74,7 +75,6 @@ const Profile = () => {
 	}, [file]);
 
 	const handleChange = (e) => {
-		console.log(formData);
 		setFormData({ ...formData, [e.target.id]: e.target.value });
 	};
 
@@ -83,7 +83,7 @@ const Profile = () => {
 
 		try {
 			dispatch(updateUserStart());
-			console.log(formData);
+
 			const res = await fetch("/api/user/update/" + currentUser._id, {
 				method: "POST",
 				headers: {
