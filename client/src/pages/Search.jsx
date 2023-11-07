@@ -248,13 +248,17 @@ const Search = () => {
 					{!loading &&
 						listings &&
 						listings.map((listing) => (
-							<ListingItem key={listing._id} listing={listing} />
+							<div
+								key={listing._id}
+								className="min-w-[330px] max-w-[550px] sm:w-full sm:mx-auto xl:mx-0 xl:w-[calc(50%-10px)] 2xl:w-[calc(33%-10px)]">
+								<ListingItem listing={listing} />
+							</div>
 						))}
 				</div>
 				{showMore && (
 					<button
 						className="text-green-700 hover:underline p-7"
-						onClick={handleShowMoreClick()}>
+						onClick={handleShowMoreClick}>
 						Show more
 					</button>
 				)}

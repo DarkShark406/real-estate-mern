@@ -32,7 +32,7 @@ const Header = () => {
 				<Link to="/">
 					<h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
 						<span className="text-slate-500">DarkShark</span>
-						<span className="w-2"></span>
+
 						<span className="text-slate-700">Estate</span>
 					</h1>
 				</Link>
@@ -42,7 +42,7 @@ const Header = () => {
 					<input
 						type="text"
 						placeholder="Search..."
-						className="bg-transparent focus:outline-none w-24 sm:w-64"
+						className="text-xs sm:text-sm bg-transparent focus:outline-none w-24 sm:w-64"
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 					/>
