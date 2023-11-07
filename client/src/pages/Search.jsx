@@ -19,6 +19,7 @@ const Search = () => {
 	const [showMore, setShowMore] = useState(false);
 
 	useEffect(() => {
+		document.documentElement.scrollTop = 0;
 		const urlParams = new URLSearchParams(location.search);
 		const searchTermFromUrl = urlParams.get("searchTerm");
 		const typeFromUrl = urlParams.get("type");
