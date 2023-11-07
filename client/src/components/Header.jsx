@@ -42,7 +42,7 @@ const Header = () => {
 					<input
 						type="text"
 						placeholder="Search..."
-						className="text-xs sm:text-sm bg-transparent focus:outline-none w-24 sm:w-64"
+						className="text-xs sm:text-sm bg-transparent focus:outline-none w-44 sm:w-52 md:w-80"
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
 					/>
