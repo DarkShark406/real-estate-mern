@@ -74,7 +74,7 @@ const Home = () => {
 			</div>
 			{/* swiper */}
 
-			<Swiper navigation>
+			<Swiper navigation loop={true}>
 				{offerlistings.length > 0 &&
 					offerlistings.map((listing) => (
 						<SwiperSlide key={listing._id}>
